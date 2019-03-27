@@ -5,7 +5,7 @@
   "author": "dongyaw <ya784820999@163.com>",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js --host 192.168.199.199",
+    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js --host 192.168.199.198",
     "start": "npm run dev",
     "build": "node build/build.js"
   },
@@ -51,7 +51,7 @@
     "uglifyjs-webpack-plugin": "^1.1.1",
     "url-loader": "^1.1.2",
     "vue": "^2.5.2",
-    "vue-loader": "^14.2.2",
+    "vue-loader": "^15.6.0",
     "vue-router": "^3.0.1",
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.5.2",

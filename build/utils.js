@@ -1,7 +1,7 @@
 'use strict'
 const path = require('path')
 const config = require('../config')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const MiniCssExtractPlugin = require("mini-css-extract-plugin") 
 const packageConfig = require('../package.json')
 
 exports.assetsPath = function (_path) {
@@ -18,7 +18,9 @@ exports.cssLoaders = function (options) {
   const cssLoader = {
     loader: 'css-loader',
     options: {
-      sourceMap: options.sourceMap
+      minimize: process.env.NODE_ENV === 'production',
+      sourceMap: options.sourceMap,
+      importLoaders: 1
     }
   }
 
@@ -30,8 +32,8 @@ exports.cssLoaders = function (options) {
   }
 
   // generate loader string to be used with extract text plugin
-  function generateLoaders (loader, loaderOptions) {
-    const loaders = options.usePostCSS ? [cssLoader, postcssLoader] : [cssLoader]
+  function generateLoaders(loader, loaderOptions) {
+    const loaders = []
 
     if (loader) {
       loaders.push({
@@ -45,13 +47,15 @@ exports.cssLoaders = function (options) {
     // Extract CSS when that option is specified
     // (which is the case during production build)
     if (options.extract) {
-      return ExtractTextPlugin.extract({
-        use: loaders,
-        publicPath:'../../',
-        fallback: 'vue-style-loader'
-      })
+      let extractLoader = {
+        loader: MiniCssExtractPlugin.loader,
+        options: {}
+      }
+      // 不清楚先后顺序是否影响编译，但当前顺序是正确的
+      return [extractLoader, 'css-loader'].concat(['postcss-loader'], loaders)
     } else {
-      return ['vue-style-loader'].concat(loaders)
+      // 不清楚先后顺序是否影响编译，但当前顺序是正确的
+      return ['vue-style-loader', 'css-loader'].concat(['postcss-loader'], loaders)
     }
   }
 
