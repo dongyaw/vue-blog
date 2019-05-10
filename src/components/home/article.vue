@@ -44,29 +44,37 @@ export default {
   },
   mounted() {
     this.$http
-      .get("http://192.168.199.198:3000/api/getArticleList")
+      .get("http://127.0.0.1:3000/api/getArticleList")
       .then(response => {
         this.articleLists = response.data.data.list;
-      })
-      .then(() => {
-        this.$nextTick(function() {
-          let wrapper = this.$refs.new_article
-          artListScroll = new BScroll(wrapper,{
-            click: true,
-            probeType: 3
-          })
-          artListScroll.on('scroll',(pos) => {
-            if(pos.y<0 && !this.isPc){
-              this.$parent.conRightShow = false
-            } else {
-              this.$parent.conRightShow = true
-            }
-          })
-        })
       })
       .catch(err => {
         console.log(err);
       });
+  },
+  created(){
+    this.$nextTick(() => {
+      this.initScroll()
+    })
+  },
+  methods: {
+    initScroll () {
+      this.$nextTick(function() {
+        let wrapper = this.$refs.new_article
+        artListScroll = new BScroll(wrapper,{
+          click: true,
+          mouseWheel:true,
+          probeType: 3
+        })
+        artListScroll.on('scroll',(pos) => {
+          if(pos.y<0 && !this.isPc){
+            this.$parent.conRightShow = false
+          } else {
+            this.$parent.conRightShow = true
+          }
+        })
+      })
+    }
   },
   updated() {}
 };

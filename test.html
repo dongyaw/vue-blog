@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let arr1=[1,5,10,25,9],arr2=[2,99,3,5]
+        function f1 (a){
+            let len=a.length
+            for(let i=0;i<len;i++){
+                for(let j=0;j<len;j++){
+                    for(let k=0;k<len;k++){
+                        if(a[i]!=a[j]!=a[k]){
+                            if(a[i]+a[j]==a[k]){
+                                console.log(true)
+                            }else console.log(false)
+                        }
+                    }
+                }
+            }
+        }
+        //console.log(f1(arr1))
+        console.log(f1(arr2))
+    </script>
+</body>
+</html>

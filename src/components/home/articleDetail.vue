@@ -27,7 +27,7 @@ export default {
     // 获取文章详情
     this.$nextTick(function() {
       this.$http
-        .get("http://192.168.199.198:3000/api/getArticleById", {
+        .get("http://127.0.0.1:3000/api/getArticleById", {
           params: {
             id: this.$route.query.id
           }
@@ -40,6 +40,7 @@ export default {
             let wrapper = this.$refs.new_article;
             artDetaScroll = new BScroll(wrapper, {
               click: true,
+              mouseWheel:true,
               probeType: 3
             });
             artDetaScroll.on('scroll',(pos) => {

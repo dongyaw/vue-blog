@@ -23,7 +23,7 @@ export default {
     );
     this.$nextTick(function() {
       this.$http
-        .get("http://192.168.199.198:3000/api/getAboutUser")
+        .get("http://127.0.0.1:3000/api/getAboutUser")
         .then(response => {
           this.about = response.data.data;
         })
@@ -32,6 +32,7 @@ export default {
             let wrapper = this.$refs.aboutRef;
             aboutScroll = new BScroll(".aboutContainer", {
               click: true,
+              mouseWheel:true,
               probeType: 3
             });
             // aboutScroll.on("scroll", pos => {
